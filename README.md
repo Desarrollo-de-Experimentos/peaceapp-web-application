@@ -22,4 +22,4 @@ npm run dev
 ## License
 [MIT](./LICENSE)
 ```
-# PeaceApp Web Application
+PeaceApp Web Application
