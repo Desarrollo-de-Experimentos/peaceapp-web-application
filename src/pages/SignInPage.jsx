@@ -39,6 +39,11 @@ const SignIn = () => {
                 </div>
             </AuthCard>
 
+            <div className="flex flex-col items-center justify-center gap-.5" style={{marginTop: "1rem"}}>
+                <p className="text-sm text-[#010101] font-regular text-center">Don't have an account yet?</p>
+                <p className="text-sm text-[var(--color-primary)] font-regular cursor-pointer text-center" onClick={() => console.log("Sign Up")}>Join now</p>
+            </div>
+
         </div>
     )
 }
