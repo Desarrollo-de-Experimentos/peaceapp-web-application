@@ -67,7 +67,10 @@ const SignUp = () => {
                 <div className="flex items-center justify-center gap-2 mt-4 mb-4">
 
                     <Button
-                        onClick={() => console.log("Sign up")}
+                        onClick={() => {
+                            console.log("Sign Up")
+                            navigate("/terms-conditions")
+                        }}
                     >Sign Up</Button>
                 </div>
             </AuthCard>
