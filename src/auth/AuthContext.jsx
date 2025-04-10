@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -23,7 +24,13 @@ export const AuthProvider = ({ children }) => {
                 setUser(null);
             }
         }
+
+        setLoading(false);
     }, []);
+
+    if(loading) {
+        return <div className="flex items-center justify-center h-screen">Loading...</div>;
+    }
 
     return (
         <AuthContext.Provider value={{ user }}>
