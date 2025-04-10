@@ -7,10 +7,16 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        console.log("ola")
         
         if(token) {
             try {
                 // get user info
+                const userData = JSON.parse(localStorage.getItem("user"));
+                if(userData) {
+                    setUser(userData);
+                }
+                console.log("User data loaded from local storage:", userData);
             }catch(e) {
                 console.log(`Error getting user info: ${e.message}`);
                 localStorage.removeItem("token");

@@ -5,6 +5,7 @@ import FlagInput from "../components/FlagInput.jsx";
 import PasswordInput from "../components/PasswordInput.jsx";
 import Button from "../components/Button.jsx";
 import { useNavigate } from "react-router-dom";
+import User from "../models/UserModel.js";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -16,6 +17,18 @@ const SignUp = () => {
 
     const goToSignIn = () => {
         navigate("/sign-in");
+    }
+
+    const checkInputsFilled = () => {
+        if (!name || !lastName || !phoneNumber || !email || !password) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        console.log("All fields filled");
+        // adding to the localstorage the data
+        localStorage.setItem("user", JSON.stringify({name, lastName, phoneNumber, email, password}));
+        console.log("User data saved to local storage");
     }
 
     return (
@@ -68,7 +81,7 @@ const SignUp = () => {
 
                     <Button
                         onClick={() => {
-                            console.log("Sign Up")
+                            checkInputsFilled()
                             navigate("/terms-conditions")
                         }}
                     >Sign Up</Button>

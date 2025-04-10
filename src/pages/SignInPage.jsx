@@ -4,6 +4,7 @@ import TextInput from "../components/TextInput.jsx";
 import PasswordInput from "../components/PasswordInput.jsx";
 import Button from "../components/Button.jsx";
 import { useNavigate } from "react-router-dom";
+import ApiService from "../services/ApiService.js";
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -14,7 +15,21 @@ const SignIn = () => {
     const goToSignUp = () => {
         navigate("/sign-up");
     }
-    
+
+    const checkInputsFilled = async () => {
+        if (!email || !password) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        try {
+            const response = await ApiService.post("/authentication/sign-in", {email, password});
+            console.log(response.data);
+        }catch(e) {
+            console.error(e);
+        }
+    }
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center px-4">
             <AuthCard>
@@ -41,7 +56,7 @@ const SignIn = () => {
                 <div className="flex items-center justify-center gap-2 mt-4 mb-4">
 
                     <Button
-                        onClick={() => console.log("Sign In")}
+                        onClick={checkInputsFilled}
                     >Sign In</Button>
                 </div>
             </AuthCard>

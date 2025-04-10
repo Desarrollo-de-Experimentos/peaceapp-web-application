@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AuthCard from "../components/AuthCard";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import ApiService from "../services/ApiService.js";
 
 const TermsConditions = () => {
     const navigate = useNavigate();
@@ -14,10 +15,49 @@ const TermsConditions = () => {
     const checkTermsAccepted = () => {
         if (!termsAccepted) {
             alert("Please accept the terms and conditions to proceed.");
-            return;
+            return false;
         }
 
-        console.log("Terms and conditions accepted");
+        return true;
+    }
+
+    const obtainToken = async ({name, lastName, phoneNumber, email, password}) => {
+        try {
+            const response = await ApiService.post("/authentication/sign-in", {username: email, password});
+            const {id, token} = response.data;
+
+            localStorage.removeItem("user");
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify({id, name, lastName, phoneNumber, email}));
+
+            // clear the previous navigation history
+            window.history.pushState(null, null, "/");
+            navigate("/");
+        }catch(e) {
+            console.error(e);
+        }
+    }
+
+    const registerUser = async () => {
+        const checked = checkTermsAccepted()
+        if(!checked) return;
+
+        try {
+            const userData = JSON.parse(localStorage.getItem("user"));
+            console.log(userData);
+
+            if(!userData) return;
+            const { email, password } = userData;
+
+            const response = await ApiService.post("/authentication/sign-up", {username: email, password, roles: ["ROLE_USER"]});
+
+            const {message} = response.data;
+            if(message) return; // xd "error" message from backend
+            
+            await obtainToken(userData);
+        }catch(e) {
+            console.error(e);
+        }
     }
 
     return  (
@@ -36,7 +76,7 @@ const TermsConditions = () => {
                 </div>
 
                 <Button
-                    onClick={checkTermsAccepted}
+                    onClick={registerUser}
                     >
                     Confirm
                 </Button>

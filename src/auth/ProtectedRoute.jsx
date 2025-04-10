@@ -12,6 +12,7 @@ const ProtectedRoute = ({ children }) => {
     const { user } = useAuth();
 
     if (!user) {
+        console.log("User not authenticated, redirecting to sign-in page.");
         return <Navigate to="/sign-in" replace/>;
     }
     return children;
