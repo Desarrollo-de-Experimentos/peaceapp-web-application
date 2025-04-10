@@ -3,11 +3,18 @@ import AuthCard from "../components/AuthCard.jsx";
 import TextInput from "../components/TextInput.jsx";
 import PasswordInput from "../components/PasswordInput.jsx";
 import Button from "../components/Button.jsx";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    
+    const goToSignUp = () => {
+        navigate("/sign-up");
+    }
+    
     return (
         <div className="min-h-screen flex flex-col items-center justify-center px-4">
             <AuthCard>
@@ -41,7 +48,7 @@ const SignIn = () => {
 
             <div className="flex flex-col items-center justify-center gap-.5" style={{marginTop: "1rem"}}>
                 <p className="text-sm text-[#010101] font-regular text-center">Don't have an account yet?</p>
-                <p className="text-sm text-[var(--color-primary)] font-regular cursor-pointer text-center" onClick={() => console.log("Sign Up")}>Join now</p>
+                <p className="text-sm text-[var(--color-primary)] font-regular cursor-pointer text-center" onClick={goToSignUp}>Join now</p>
             </div>
 
         </div>

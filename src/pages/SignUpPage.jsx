@@ -4,14 +4,19 @@ import TextInput from "../components/TextInput.jsx";
 import FlagInput from "../components/FlagInput.jsx";
 import PasswordInput from "../components/PasswordInput.jsx";
 import Button from "../components/Button.jsx";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const goToSignIn = () => {
+        navigate("/sign-in");
+    }
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center px-4">
@@ -69,7 +74,7 @@ const SignUp = () => {
 
             <div className="flex flex-col items-center justify-center gap-.5" style={{marginTop: "1rem"}}>
                 <p className="text-sm text-[#010101] font-regular text-center">Already have an account?</p>
-                <p className="text-sm text-[var(--color-primary)] font-regular cursor-pointer text-center" onClick={() => console.log("login")}>Log in</p>
+                <p className="text-sm text-[var(--color-primary)] font-regular cursor-pointer text-center" onClick={goToSignIn}>Log in</p>
             </div>
         </div>
     )
