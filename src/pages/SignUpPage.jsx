@@ -27,7 +27,7 @@ const SignUp = () => {
 
         console.log("All fields filled");
         // adding to the localstorage the data
-        localStorage.setItem("user", JSON.stringify({name, lastName, phoneNumber, email, password}));
+        localStorage.setItem("user", JSON.stringify({name, lastname:lastName, phonenumber:phoneNumber, email, password}));
         console.log("User data saved to local storage");
         return true;
     }

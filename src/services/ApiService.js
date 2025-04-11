@@ -10,7 +10,7 @@ class ApiService {
             },
         });
 
-        /*
+        
         this.client.interceptors.request.use((config) => {
             const token = localStorage.getItem("token");
             if (token) {
@@ -18,7 +18,7 @@ class ApiService {
             }
             return config;
         });
-        */
+        
     }
 
     get(url, params = {}) {

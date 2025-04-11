@@ -1,10 +1,11 @@
 class User {
-    constructor(id, name, lastName, email, phoneNumber) {
-        this.id = id;
+    constructor({id, name, lastname, email, phonenumber, profile_image = null}) {
+        this.user_id = id;
         this.name = name;
         this.email = email;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+        this.lastname = lastname;
+        this.phonenumber = phonenumber;
+        this.profile_image = profile_image;
     }
     
     getName() {

@@ -5,15 +5,38 @@ import PasswordInput from "../components/PasswordInput.jsx";
 import Button from "../components/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService.js";
+import { HttpStatusCode } from "axios";
+import { useAuth } from "../auth/AuthContext.jsx";
+import User from "../models/UserModel.js";
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const {setUser} = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
     const goToSignUp = () => {
         navigate("/sign-up");
+    }
+
+    const getUserData = async (username) => {
+        try {
+            const response = await ApiService.get(`/users/${username}`);
+            
+            if(response.status !== HttpStatusCode.Ok) {
+                alert(response.data.message);
+                return;
+            }
+
+            const user = new User(response.data);
+
+            localStorage.setItem("user", JSON.stringify(user));
+            console.log(response.data);
+            return user
+        }catch(e) {
+            console.error(e);
+        }
     }
 
     const checkInputsFilled = async () => {
@@ -23,8 +46,24 @@ const SignIn = () => {
         }
 
         try {
-            const response = await ApiService.post("/authentication/sign-in", {email, password});
+            const response = await ApiService.post("/authentication/sign-in", {username: email, password});
+            
+            const {message} = response.data;
+            if(message || response.status !== HttpStatusCode.Ok){
+                alert(message);
+                return;
+            }
+
             console.log(response.data);
+
+            const {token} = response.data;
+            localStorage.setItem("token", token);
+
+            const user = await getUserData(email);
+            
+            setUser(JSON.stringify(user)); // set the user in the context
+            navigate("/", {replace: true});
+            
         }catch(e) {
             console.error(e);
         }

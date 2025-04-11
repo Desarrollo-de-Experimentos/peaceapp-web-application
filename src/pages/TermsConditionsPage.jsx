@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService.js";
 import { useAuth } from "../auth/AuthContext.jsx";
+import User from "../models/UserModel.js";
+import { HttpStatusCode } from "axios";
 
 const TermsConditions = () => {
     const navigate = useNavigate();
@@ -23,17 +25,32 @@ const TermsConditions = () => {
         return true;
     }
 
-    const obtainToken = async ({name, lastName, phoneNumber, email, password}) => {
+    const saveUserProfile = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            
+            if(!user) return;
+            
+            console.log("Saving user profile...");
+            const response = await ApiService.post("/users", new User(user));
+            console.log(response.data);
+
+            navigate("/", {replace: true}); // redirect to home page
+        }catch(e) {
+            console.error(e);
+        }
+    }
+
+    const obtainToken = async ({name, lastname, phonenumber, email, password}) => {
         try {
             const response = await ApiService.post("/authentication/sign-in", {username: email, password});
             const {id, token} = response.data;
 
             localStorage.removeItem("user");
             localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify({id, name, lastName, phoneNumber, email}));
+            localStorage.setItem("user", JSON.stringify({id, name, lastname, phonenumber, email}));
 
-            setUser({id, name, lastName, phoneNumber, email}); // set the user in the context
-            navigate("/", {replace: true}); // redirect to home page
+            setUser({id, name, lastname, phonenumber, email}); // set the user in the context
         }catch(e) {
             console.error(e);
         }
@@ -45,7 +62,6 @@ const TermsConditions = () => {
 
         try {
             const userData = JSON.parse(localStorage.getItem("user"));
-            console.log(userData);
 
             if(!userData) return;
             const { email, password } = userData;
@@ -53,9 +69,16 @@ const TermsConditions = () => {
             const response = await ApiService.post("/authentication/sign-up", {username: email, password, roles: ["ROLE_USER"]});
 
             const {message} = response.data;
-            if(message) return; // xd "error" message from backend
-            
+
+            console.log(response.data);
+            if(message || response.status !== HttpStatusCode.Created) {
+                alert(message); // xd "error" message from backend
+
+                return;
+            }
+
             await obtainToken(userData);
+            await saveUserProfile();
         }catch(e) {
             console.error(e);
         }
