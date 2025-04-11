@@ -3,9 +3,11 @@ import AuthCard from "../components/AuthCard";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService.js";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 const TermsConditions = () => {
     const navigate = useNavigate();
+    const { setUser } = useAuth();
     const [termsAccepted, setTermsAccepted] = useState(false);
 
     const goToSignIn = () => {
@@ -30,9 +32,8 @@ const TermsConditions = () => {
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify({id, name, lastName, phoneNumber, email}));
 
-            // clear the previous navigation history
-            window.history.pushState(null, null, "/");
-            navigate("/");
+            setUser({id, name, lastName, phoneNumber, email}); // set the user in the context
+            navigate("/", {replace: true}); // redirect to home page
         }catch(e) {
             console.error(e);
         }

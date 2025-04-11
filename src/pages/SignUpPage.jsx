@@ -22,13 +22,14 @@ const SignUp = () => {
     const checkInputsFilled = () => {
         if (!name || !lastName || !phoneNumber || !email || !password) {
             alert("Please fill in all fields.");
-            return;
+            return false;
         }
 
         console.log("All fields filled");
         // adding to the localstorage the data
         localStorage.setItem("user", JSON.stringify({name, lastName, phoneNumber, email, password}));
         console.log("User data saved to local storage");
+        return true;
     }
 
     return (
@@ -81,8 +82,8 @@ const SignUp = () => {
 
                     <Button
                         onClick={() => {
-                            checkInputsFilled()
-                            navigate("/terms-conditions")
+                            if(checkInputsFilled())
+                                navigate("/terms-conditions")
                         }}
                     >Sign Up</Button>
                 </div>

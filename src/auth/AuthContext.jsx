@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        console.log("ola")
+        console.log("checking token", token);
         
         if(token) {
             try {
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user }}>
+        <AuthContext.Provider value={{ user, loading, setUser }}>
             {children}
         </AuthContext.Provider>
     );
