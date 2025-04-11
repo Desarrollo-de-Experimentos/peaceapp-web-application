@@ -78,14 +78,14 @@ const SignIn = () => {
 
                     <TextInput
                         label="Email"
-                        placeholder="Enter your email address"
+                        placeholder=""
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <PasswordInput
                         label="Password"
-                        placeholder="Enter your password"
+                        placeholder=""
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
