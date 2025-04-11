@@ -3,6 +3,7 @@ import SignIn from "../pages/SignInPage.jsx";
 import ProtectedRoute from "../auth/ProtectedRoute.jsx";
 import SignUp from "../pages/SignUpPage.jsx";
 import TermsConditions from "../pages/TermsConditionsPage.jsx";
+import Main from "../pages/MainPage.jsx";
 
 const AppRoutes = () => {
     return (
@@ -15,7 +16,7 @@ const AppRoutes = () => {
                 path="/"
                 element={
                     <ProtectedRoute>
-                        <h1>Home</h1>
+                        <Main />
                     </ProtectedRoute>
                 }
             />
