@@ -1,7 +1,8 @@
 import React from "react";
+import LogOut from "./LogOut";
 
 const Sidebar = ({ children }) => (
-    <div className="h-full bg-white" style={{ width: "22%", padding: ".8rem" }}>
+    <div className="relative h-full bg-white" style={{ width: "20%", padding: ".8rem" }}>
         <div className="flex items-center justify-center w-full gap-2" style={{ paddingBottom: ".8rem"}}>
             <img src="/peaceapp-logo.svg" alt="PeaceApp Logo" className="w-[55px] mx-auto" />
             <div className="flex flex-col justify-center">
@@ -11,6 +12,8 @@ const Sidebar = ({ children }) => (
         </div>
 
         {children}
+
+        <LogOut onClick={() => {}} />
     </div>
 )
 
