@@ -43,3 +43,13 @@ h2, h3 {
 .no-spinner {
   -moz-appearance: textfield; /* Firefox */
 }
+
+.custom-user-marker {
+  transition: transform 0.3s ease;
+  transform: translateY(0); /* default position */
+}
+
+.custom-user-marker.lifted {
+  transform: translateY(-10px); /* lift up */
+}
+
