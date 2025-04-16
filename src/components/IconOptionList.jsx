@@ -21,7 +21,7 @@ const IconOptionList = () => {
 
     const handleOptionClick = (text) => {
         setSelectedOption(text);
-        setIsOpen(false); // Optionally close dropdown after selection
+        setIsOpen(false); 
         console.log("Selected:", text);
     };
 
