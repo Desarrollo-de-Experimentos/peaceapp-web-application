@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Map from "../components/Map.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import ReportsSidebar from "../components/Sidebar/ReportsSidebar.jsx";
@@ -15,6 +16,7 @@ import mapFilledIcon from "../assets/icons/map-filled.svg";
 import reportFilledIcon from "../assets/icons/report-filled.svg";
 import locationFilledIcon from "../assets/icons/location-filled.svg";
 import alertFilledIcon from "../assets/icons/alert-filled.svg";
+import NewReportSidebar from "../components/Sidebar/NewReportSidebar.jsx";
 
 const Main = () => {
     const [selectedOption, setSelectedOption] = useState("");
@@ -25,7 +27,23 @@ const Main = () => {
         setSidebarView(option || "main");
     };
 
+    
+    const locationURL = useLocation()
+    const navigate = useNavigate()
+
+    const params = new URLSearchParams(locationURL.search)
+    const reportType = params.get('type')
+
     const renderSidebar = () => {
+        if (locationURL.pathname === "/new-report" && reportType) {
+            return (
+                <NewReportSidebar
+                    type={reportType}
+                    onBack={() => navigate(-1)} // back to previous page
+                />
+            );
+        }
+
         switch (sidebarView) {
             case "report":
                 return <ReportsSidebar onBack={() => setSidebarView("main")} />;

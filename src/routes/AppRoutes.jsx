@@ -13,7 +13,7 @@ const AppRoutes = () => {
             <Route path="/terms-conditions" element={<TermsConditions />} />
             
             <Route 
-                path="/"
+                path="/*"
                 element={
                     <ProtectedRoute>
                         <Main />

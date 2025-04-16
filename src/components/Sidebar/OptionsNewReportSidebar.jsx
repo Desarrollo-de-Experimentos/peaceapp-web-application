@@ -1,6 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar.jsx";
-import IconOptionList from "../IconOptionList.jsx";
 import IconOption from "../IconOption.jsx";
 import theftIcon from "../../assets/icons/theft-new-report.svg";
 import accidentIcon from "../../assets/icons/accident-new-report.svg";
@@ -9,10 +9,11 @@ import harassmentIcon from "../../assets/icons/harassment-new-report.svg";
 import otherIcon from "../../assets/icons/other-new-report.svg";
 
 const OptionsNewReportSidebar = ({ onBack }) => {
+    const navigate = useNavigate();
 
     const handleOptionClick = (text) => {
-        console.log("Selected:", text);
-        console.log("ola2");
+        const type = text.toLowerCase().replace(" ", "-");
+        navigate(`/new-report?type=${type}`);
     }
 
     const options = [
