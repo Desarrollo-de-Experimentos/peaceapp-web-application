@@ -7,7 +7,7 @@ import plusIcon from '../assets/icons/plus.svg';
 import IconOptionList from './IconOptionList.jsx';
 
 
-const Map = () => {
+const Map = ({ onNewReportClick }) => {
     /**
      * this component is responsible for displaying the map and the user's current location
      * ALERT: for our Mapbox plan we are limited to 50,000 map loads per month, so we need to be careful with the number of loads we do.
@@ -72,9 +72,7 @@ const Map = () => {
             >
 
             <div className="absolute top-0 left-0 z-10 flex items-center justify-center gap-2" style={{ padding: "0.2rem 0.8rem", margin: "1rem" }}>
-                <IconOption icon={plusIcon} text={"New report"} onClick={() => {
-                    console.log("New report clicked");
-                }} itemList={true} />
+                <IconOption icon={plusIcon} text={"New report"} onClick={onNewReportClick} itemList={true} />
                 <IconOptionList />
             </div>
         </div>
