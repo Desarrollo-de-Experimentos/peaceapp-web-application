@@ -13,7 +13,7 @@ const Sidebar = ({ children }) => (
 
         {children}
 
-        <LogOut onClick={() => {}} />
+        <LogOut />
     </div>
 )
 
