@@ -58,7 +58,7 @@ const Map = ({ onNewReportClick }) => {
         };
     }, [location]); // only running when the location changes
 
-    if (!location) return <div>Loading the peaceapp...</div>;
+    if (!location) return <div>Loading the PeaceApp's Map</div>;
 
     return (
         <div id="map-container" ref={mapContainerRef} style={{ 
