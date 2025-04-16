@@ -2,6 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { obtainCurrentLocation } from '../utils/currentLocation.js';
+import IconOption from './IconOption.jsx';
+import plusIcon from '../assets/icons/plus.svg';
+import IconOptionList from './IconOptionList.jsx';
+
 
 const Map = () => {
     /**
@@ -65,7 +69,15 @@ const Map = () => {
                 right: 0,
             }} 
                 
-            />
+            >
+
+            <div className="absolute top-0 left-0 z-10 flex items-center justify-center gap-2" style={{ padding: "0.2rem 0.8rem", margin: "1rem" }}>
+                <IconOption icon={plusIcon} text={"New report"} onClick={() => {
+                    console.log("New report clicked");
+                }} itemList={true} />
+                <IconOptionList />
+            </div>
+        </div>
     );
 };
 
