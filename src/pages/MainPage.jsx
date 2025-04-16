@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import ReportsSidebar from "../components/Sidebar/ReportsSidebar.jsx";
 import AlertsSidebar from "../components/Sidebar/AlertsSidebar.jsx";
 import LocationsSidebar from "../components/Sidebar/LocationsSidebar.jsx";
-import NewReportSidebar from "../components/Sidebar/NewReportSidebar.jsx";
+import OptionsNewReportSidebar from "../components/Sidebar/OptionsNewReportSidebar.jsx";
 import CardUserProfile from "../components/CardUserProfile.jsx";
 import ItemOption from "../components/ItemOption.jsx";
 import mapIcon from "../assets/icons/map.svg";
@@ -34,7 +34,7 @@ const Main = () => {
             case "location":
                 return <LocationsSidebar onBack={() => setSidebarView("main")} />;
             case "newReport":
-                return <NewReportSidebar onBack={() => setSidebarView("main")} />;
+                return <OptionsNewReportSidebar onBack={() => setSidebarView("main")} />;
             default:
                 return (
                     <Sidebar>

@@ -8,7 +8,7 @@ import lightingIcon from "../../assets/icons/lighting-new-report.svg";
 import harassmentIcon from "../../assets/icons/harassment-new-report.svg";
 import otherIcon from "../../assets/icons/other-new-report.svg";
 
-const NewReportSidebar = ({ onBack }) => {
+const OptionsNewReportSidebar = ({ onBack }) => {
 
     const handleOptionClick = (text) => {
         console.log("Selected:", text);
@@ -47,4 +47,4 @@ const NewReportSidebar = ({ onBack }) => {
     );
 };
 
-export default NewReportSidebar;
+export default OptionsNewReportSidebar;
