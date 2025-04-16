@@ -15,6 +15,13 @@ class User {
     getEmail() {
         return this.email;
     }
+
+    getNameCard(){
+        const fullname = this.name.split(" ");
+        const lastname = this.lastname.split(" ");
+
+        return `${fullname[0]} ${lastname[0]}`;
+    }
 }
 
 export default User;
