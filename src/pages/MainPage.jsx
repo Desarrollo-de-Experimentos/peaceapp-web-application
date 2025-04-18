@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { replace, useLocation, useNavigate } from "react-router-dom";
 import Map from "../components/Map.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import ReportsSidebar from "../components/Sidebar/ReportsSidebar.jsx";
@@ -40,6 +40,10 @@ const Main = () => {
                 <NewReportSidebar
                     type={reportType}
                     onBack={() => navigate(-1)} // back to previous page
+                    reportSubmitted={() => {
+                        setSidebarView("main");
+                        navigate("/", { replace: true });
+                    }}
                 />
             );
         }
@@ -52,7 +56,7 @@ const Main = () => {
             case "location":
                 return <LocationsSidebar onBack={() => setSidebarView("main")} />;
             case "newReport":
-                return <OptionsNewReportSidebar onBack={() => setSidebarView("main")} />;
+                return <OptionsNewReportSidebar onBack={() => {setSidebarView("main"); navigate(-1)}} />;
             default:
                 return (
                     <Sidebar>
@@ -91,7 +95,7 @@ const Main = () => {
     return (
         <div className="w-full h-screen flex">
             {renderSidebar()}
-            <Map onNewReportClick={() => setSidebarView("newReport")} />
+            <Map onNewReportClick={() => {setSidebarView("newReport"); navigate("/new-report")}} />
         </div>
     );
 };

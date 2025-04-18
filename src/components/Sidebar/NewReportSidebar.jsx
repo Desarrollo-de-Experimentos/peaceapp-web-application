@@ -4,13 +4,15 @@ import TextInput from "../TextInput.jsx";
 import Button from "../Button.jsx";
 import { obtainCurrentLocation } from "../../utils/currentLocation.js";
 import ImageInput from "../ImageInput.jsx";
+import ApiService from "../../services/ApiService.js";
+import Report from "../../models/ReportModel.js";
+import { HttpStatusCode } from "axios";
 
-const NewReportSidebar = ({ type, onBack }) => {
+const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
     const [image, setImage] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState(null);
-
 
     useEffect(() => {
         const fetchCurrentLocation = async () => {
@@ -37,14 +39,38 @@ const NewReportSidebar = ({ type, onBack }) => {
 
     const submitInfo = async () => {
         if (!verifyInputsFilled()) return;
+        const userStorage = JSON.parse(localStorage.getItem("user"));
+        if(!userStorage) {
+            console.error("User not found in local storage.");
+            return;
+        }
+
+        const {user_id} = userStorage;
 
         try {
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("description", description);
-            formData.append("image", image);
+            const responseReport = await ApiService.post("/reports/", {
+                title,
+                detail: description,
+                type,
+                user_id,
+                image: "",
+                address: ""
+            });
+            const report = new Report(responseReport.data);
 
-            console.log("Submitting report with data:", formData.get("title"), formData.get("description"), formData.get("image"));
+            const responseLocation = await ApiService.post("/locations/", {
+                latitude: location.latitude.toString(),
+                longitude: location.longitude.toString(),
+                idReport: report.id
+            });
+
+            if(responseReport.status === HttpStatusCode.Created && responseLocation.status === HttpStatusCode.Created) {
+                console.log("Report and location created successfully:", report, responseLocation.data);
+                reportSubmitted();
+            }else {
+                alert("Error creating report or location.");
+            }
+
         } catch(e) {
             console.error("Error submitting report:", e);
         }
