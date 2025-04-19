@@ -7,26 +7,28 @@ import ImageInput from "../ImageInput.jsx";
 import ApiService from "../../services/ApiService.js";
 import Report from "../../models/ReportModel.js";
 import { HttpStatusCode } from "axios";
+import { useMapLocation } from "../../contexts/MapLocationContext.jsx";
 
 const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
     const [image, setImage] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState(null);
+    const {mapLocation} = useMapLocation();
 
     useEffect(() => {
-        const fetchCurrentLocation = async () => {
-            try {
+        if (mapLocation) {
+            console.log("Map location:", mapLocation);
+            setLocation(mapLocation);
+        } else {
+            const fetchCurrentLocation = async () => {
                 const location = await obtainCurrentLocation();
-                console.log("Current location:", location);
                 setLocation(location);
-            }
-            catch(e){
-                console.error("Error obtaining location:", e);
-            }
+            };
+            fetchCurrentLocation();
         }
-        fetchCurrentLocation();
-    }, []);
+    }, [mapLocation]);
+    
 
     const verifyInputsFilled = () => {
         if (!title || !description || !image) {
@@ -65,7 +67,11 @@ const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
             });
 
             if(responseReport.status === HttpStatusCode.Created && responseLocation.status === HttpStatusCode.Created) {
-                console.log("Report and location created successfully:", report, responseLocation.data);
+                setTitle("");
+                setDescription("");
+                setImage(null);
+                setLocation(null);
+
                 reportSubmitted();
             }else {
                 alert("Error creating report or location.");

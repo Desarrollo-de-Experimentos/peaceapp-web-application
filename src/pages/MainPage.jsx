@@ -17,6 +17,7 @@ import reportFilledIcon from "../assets/icons/report-filled.svg";
 import locationFilledIcon from "../assets/icons/location-filled.svg";
 import alertFilledIcon from "../assets/icons/alert-filled.svg";
 import NewReportSidebar from "../components/Sidebar/NewReportSidebar.jsx";
+import { MapLocationProvider } from "../contexts/MapLocationContext.jsx";
 
 const Main = () => {
     const [selectedOption, setSelectedOption] = useState("");
@@ -94,8 +95,11 @@ const Main = () => {
 
     return (
         <div className="w-full h-screen flex">
-            {renderSidebar()}
-            <Map onNewReportClick={() => {setSidebarView("newReport"); navigate("/new-report")}} />
+            <MapLocationProvider>
+                {renderSidebar()}
+
+                <Map onNewReportClick={() => {setSidebarView("newReport"); navigate("/new-report")}} />
+            </MapLocationProvider>
         </div>
     );
 };

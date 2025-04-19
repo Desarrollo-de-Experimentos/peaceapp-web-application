@@ -2,7 +2,7 @@ import axios from "axios";
 
 class ApiService {
     constructor() {
-        const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/v1";
+        const baseURL = import.meta.env.VITE_APP_URL || "http://localhost:8080/api/v1";
         this.client = axios.create({
             baseURL,
             headers: {

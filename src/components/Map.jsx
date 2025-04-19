@@ -5,6 +5,11 @@ import { obtainCurrentLocation } from '../utils/currentLocation.js';
 import IconOption from './IconOption.jsx';
 import plusIcon from '../assets/icons/plus.svg';
 import IconOptionList from './IconOptionList.jsx';
+import { useWebSocketContext } from '../contexts/WebSocketContext.jsx';
+import Location from "../models/LocationModel.js";
+import { useMapLocation } from '../contexts/MapLocationContext.jsx';
+import ApiService from '../services/ApiService.js';
+import { HttpStatusCode } from 'axios';
 
 const Map = ({ onNewReportClick }) => {
     /**
@@ -20,7 +25,117 @@ const Map = ({ onNewReportClick }) => {
     const markerRef = useRef(null);
 
     const [location, setLocation] = useState(null);
+    const [mapIsLoaded, setMapIsLoaded] = useState(false);
+    const {locationMessage} = useWebSocketContext();
+    const {setMapLocation} = useMapLocation();
 
+    const pointIcon = (type) => {
+        switch (type) {
+            case "theft":
+                return "src/assets/icons/map/theft-map.svg";
+            case "car-accident":
+                return "src/assets/icons/map/car-accident-map.svg";
+            case "harassment":
+                return "src/assets/icons/map/harassment-map.svg";
+            case "lighting":
+                return "src/assets/icons/map/lighting-map.svg";
+            default:
+                return "src/assets/icons/map/other-map.svg";
+        }
+    }
+
+    // this effect is responsible for displaying the reports on the map when the component mounts
+    useEffect(() => {
+        if (!location || !mapRef.current || !mapIsLoaded) return;
+
+        const fetchAndDisplayReports = async () => {
+            try {
+                const response = await ApiService.get(`/locations/`);
+                if (response.status !== HttpStatusCode.Ok) {
+                    console.error("Error fetching locations:", response.statusText);
+                    return;
+                }
+
+                // getting the report types
+                const reportsResponse = await ApiService.get(`/reports/`);
+                if (reportsResponse.status !== HttpStatusCode.Ok) {
+                    console.error("Error fetching reports:", reportsResponse.statusText);
+                    return;
+                }
+
+                const reports = reportsResponse.data;
+                const locations = response.data;
+
+                console.log("Locations:", locations);
+                console.log("Reports:", reports);
+
+                locations.forEach(location => {
+                    const reportType = reports.find(report => report.id === location.idReport)?.type;
+                    console.log("Report type:", reportType);
+                    if (!reportType) return;
+
+                    const markerEl = document.createElement('div');
+                    markerEl.className = 'custom-user-marker';
+                    markerEl.style.backgroundImage = `url('${pointIcon(reportType)}')`;
+                    markerEl.style.width = '50px';
+                    markerEl.style.height = '50px';
+                    markerEl.style.backgroundSize = 'contain';
+                    markerEl.style.backgroundRepeat = 'no-repeat';
+                    markerEl.style.zIndex = 1;
+
+                    new mapboxgl.Marker(markerEl)
+                        .setLngLat([location.alongitude, location.alatitude])
+                        .addTo(mapRef.current);
+                });
+            } catch (e) {
+                console.error("Error fetching reports:", e);
+            }
+        }
+
+        fetchAndDisplayReports();
+    }, [location, mapIsLoaded]);
+    
+
+    // this effect is responsible for displaying the report on the map when the user clicks on a new report
+    useEffect(() => {
+        if (!locationMessage || !mapRef.current) return;
+        const location = new Location(locationMessage);
+    
+        const fetchAndDisplayReport = async () => {
+            try {
+                const response = await ApiService.get(`/reports/${location.idReport}`);
+                if (response.status !== HttpStatusCode.Ok) {
+                    console.error("Error fetching report:", response.statusText);
+                    return;
+                }
+    
+                const reportType = response.data.type;
+                console.log("Report type:", reportType);
+                if (!reportType) return;
+    
+                const markerEl = document.createElement('div');
+                markerEl.className = 'custom-user-marker';
+                markerEl.style.backgroundImage = `url('${pointIcon(reportType)}')`;
+                markerEl.style.width = '50px';
+                markerEl.style.height = '50px';
+                markerEl.style.backgroundSize = 'contain';
+                markerEl.style.backgroundRepeat = 'no-repeat';
+                markerEl.style.zIndex = 1;
+    
+                new mapboxgl.Marker(markerEl)
+                    .setLngLat([location.alongitude, location.alatitude])
+                    .addTo(mapRef.current);
+    
+            } catch (e) {
+                console.error("Error fetching report:", e);
+            }
+        };
+    
+        fetchAndDisplayReport();
+    }, [locationMessage]);
+    
+    
+    // this effect is responsible for getting the user's current location and setting it in the state when the component mounts
     useEffect(() => {
         const fetchLocation = async () => {
             const { latitude, longitude } = await obtainCurrentLocation();
@@ -54,6 +169,7 @@ const Map = ({ onNewReportClick }) => {
         mapRef.current.on("load", () => {
             console.log("Map loaded");
 
+            setMapIsLoaded(true);
             // marking the user's location
             markerRef.current = new mapboxgl.Marker(userMarkerEl)
                 .setLngLat([location.longitude, location.latitude])
@@ -63,7 +179,7 @@ const Map = ({ onNewReportClick }) => {
         // listen to map move event, this ensures the marker moves with the map
         mapRef.current.on("move", () => {
             const center = mapRef.current.getCenter();
-            console.log("Map center:", center);
+            setMapLocation({ latitude: center.lat, longitude: center.lng });
             markerRef.current?.setLngLat([center.lng, center.lat]);
         });
 
