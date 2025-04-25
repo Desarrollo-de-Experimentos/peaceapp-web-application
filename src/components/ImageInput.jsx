@@ -23,7 +23,7 @@ const ImageInput = ({ onChange }) => {
             {image ? (
             <img src={image} alt="Selected" className="w-full h-auto" />
             ) : (
-            <p className="text-center text-gray-300 font-light text-[5rem]">+</p>
+            <p className="text-center text-gray-300 font-light text-[2rem]" style={{padding: "4rem 0"}}>+</p>
             )}
         </div>
         </div>

@@ -26,13 +26,19 @@ const OptionsNewReportSidebar = ({ onBack }) => {
 
     return (
         <Sidebar>
-            <button
-                className="text-sm text-blue-500 hover:underline mb-4 cursor-pointer"
-                onClick={onBack}
-            >
-                ← Back
-            </button>
-            <h2 className="text-lg font-bold text-center" style={{margin: "1rem .5rem"}}>New Report</h2>
+            <div className="mb-3" style={{ margin: "0 1rem"  }}>
+                <button 
+                    className="text-blue-600 hover:text-blue-800 flex items-center cursor-pointer" 
+                    onClick={onBack}
+                >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </button>
+            </div>
+            <div className="bg-[#EBF2F6] rounded-lg" style={{ padding: ".5rem 2rem", margin: "1rem 0"}}>
+                <h3 className="text-lg font-medium text-left">New Report</h3>
+            </div>
 
             <div className="flex flex-col items-center justify-center w-full">
                     {options.map((opt, index) => (
@@ -41,6 +47,9 @@ const OptionsNewReportSidebar = ({ onBack }) => {
                             icon={opt.icon}
                             text={opt.text}
                             onClick={() => handleOptionClick(opt.text)}
+                            classStyle={"w-[100%] h-[100%] flex items-center justify-center"}
+                            style={{ padding: "1rem 1rem", margin: "0.5rem 0" }}
+                            widthImage={"w-12 h-12"}
                         />
                     ))}
                 </div>
