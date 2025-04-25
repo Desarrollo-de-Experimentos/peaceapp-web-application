@@ -17,11 +17,11 @@ const OptionsNewReportSidebar = ({ onBack }) => {
     }
 
     const options = [
-        { icon: theftIcon, text: "Theft" },
-        { icon: accidentIcon, text: "Car accident" },
-        { icon: lightingIcon, text: "Lighting" },
-        { icon: harassmentIcon, text: "Harassment" },
-        { icon: otherIcon, text: "Other" },
+        { icon: theftIcon, text: "Robo" },
+        { icon: accidentIcon, text: "Accidente" },
+        { icon: lightingIcon, text: "Falta de iluminación" },
+        { icon: harassmentIcon, text: "Acoso" },
+        { icon: otherIcon, text: "Otro" },
     ]
 
     return (

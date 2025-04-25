@@ -31,13 +31,13 @@ const Map = ({ onNewReportClick }) => {
 
     const pointIcon = (type) => {
         switch (type) {
-            case "theft":
+            case "Robo":
                 return "src/assets/icons/map/theft-map.svg";
-            case "car-accident":
+            case "Accidente":
                 return "src/assets/icons/map/car-accident-map.svg";
-            case "harassment":
+            case "Acoso":
                 return "src/assets/icons/map/harassment-map.svg";
-            case "lighting":
+            case "Falta de iluminación":
                 return "src/assets/icons/map/lighting-map.svg";
             default:
                 return "src/assets/icons/map/other-map.svg";
