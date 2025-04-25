@@ -26,7 +26,8 @@ const OptionsNewReportSidebar = ({ onBack }) => {
 
     return (
         <Sidebar>
-            <div className="mb-3" style={{ margin: "0 1rem"  }}>
+            <div style={{ margin: "0 1rem"  }}>
+            <div>
                 <button 
                     className="text-blue-600 hover:text-blue-800 flex items-center cursor-pointer" 
                     onClick={onBack}
@@ -53,6 +54,7 @@ const OptionsNewReportSidebar = ({ onBack }) => {
                         />
                     ))}
                 </div>
+            </div>
         </Sidebar>
     );
 };
