@@ -10,6 +10,7 @@ import { HttpStatusCode } from "axios";
 import { useMapLocation } from "../../../contexts/MapLocationContext.jsx";
 import theftIcon from "../../../assets/icons/map/theft-map.svg";
 import TextArea from "../../Input/TextArea.jsx";
+import Cloudinary from "../../../services/Cloudinary.js";
 
 const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
     const [image, setImage] = useState(null);
@@ -89,12 +90,15 @@ const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
         const {user_id} = userStorage;
 
         try {
+
+            const imageUrl = await Cloudinary.uploadImage(image);
+
             const responseReport = await ApiService.post("/reports/", {
                 title,
                 detail: description,
                 type,
                 user_id,
-                image: "",
+                image: imageUrl? imageUrl : "",
                 address: address
             });
             const report = new Report(responseReport.data);
@@ -221,6 +225,7 @@ const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
                             icon={theftIcon}
                             text={"Add evidence"}
                             placeholder={"Add a photo of the incident"}
+                            onChange={(file) => setImage(file)}
                         />
                     </div>
 
