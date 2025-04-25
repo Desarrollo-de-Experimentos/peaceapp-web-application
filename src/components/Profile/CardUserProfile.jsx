@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import mono from "../../assets/icons/arigeimpleis.jpg";
 import { useNavigate } from "react-router-dom";
 import User from "../../models/UserModel.js";
 import { obtainCurrentLocation } from "../../utils/currentLocation.js";
@@ -33,7 +32,7 @@ const CardUserProfile = ({style}) => {
 
     return (
         <div className="flex items-center gap-3" style={{ padding: "1rem", ...style }}>
-            <img src={user.profile_image? user.profile_image : mono} alt="Profile" className="w-[45px] h-[45px] rounded-full" />
+            <img src={user.profile_image? user.profile_image : "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"} alt="Profile" className="w-[45px] h-[45px] rounded-full" />
 
             <div className="flex flex-col justify-center">
                 <h1 className="text-sm font-light text-black text-left">{user.getNameCard()}</h1>

@@ -29,18 +29,18 @@ const Map = ({ onNewReportClick }) => {
     const {locationMessage} = useWebSocketContext();
     const {setMapLocation} = useMapLocation();
 
-    const pointIcon = (type) => {
+    const pointIcon = (type) => {   
         switch (type) {
             case "Robo":
-                return "src/assets/icons/map/theft-map.svg";
+                return "/icons/map/theft-map.svg";
             case "Accidente":
-                return "src/assets/icons/map/car-accident-map.svg";
+                return "/icons/map/car-accident-map.svg";
             case "Acoso":
-                return "src/assets/icons/map/harassment-map.svg";
+                return "/icons/map/harassment-map.svg";
             case "Falta de iluminación":
-                return "src/assets/icons/map/lighting-map.svg";
+                return "/icons/map/lighting-map.svg";
             default:
-                return "src/assets/icons/map/other-map.svg";
+                return "/icons/map/other-map.svg";
         }
     }
 
@@ -158,7 +158,7 @@ const Map = ({ onNewReportClick }) => {
 
         const userMarkerEl = document.createElement('div');
         userMarkerEl.className = 'custom-user-marker';
-        userMarkerEl.style.backgroundImage = "url('src/assets/icons/current-location.svg')";
+        userMarkerEl.style.backgroundImage = "url('/icons/current-location.svg')";
         userMarkerEl.style.width = '60px';
         userMarkerEl.style.height = '60px';
         userMarkerEl.style.backgroundSize = 'contain';
