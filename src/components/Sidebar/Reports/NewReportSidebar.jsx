@@ -183,11 +183,11 @@ const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
                                 className="border rounded px-3 py-2 w-full appearance-none bg-white border-[#55B0DB]"
                                 style={{padding: "0.125rem 1rem"}}
                             >
-                                <option value="theft">Robo</option>
-                                <option value="car-accident">Accidente automovilístico</option>
-                                <option value="lighting">Falta de iluminación</option>
-                                <option value="harassment">Acoso</option>
-                                <option value="other">Otro</option>
+                                <option value="robo">Robo</option>
+                                <option value="accidente">Accidente</option>
+                                <option value="falta-de iluminación">Falta de iluminación</option>
+                                <option value="acoso">Acoso</option>
+                                <option value="otro">Otro</option>
                             </select>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                                 <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

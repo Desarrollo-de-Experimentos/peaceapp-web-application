@@ -37,9 +37,12 @@ const Main = () => {
 
     const renderSidebar = () => {
         if (locationURL.pathname === "/new-report" && reportType) {
+            let typeToReport = reportType.replace("-", " ");
+            typeToReport = typeToReport.charAt(0).toUpperCase() + typeToReport.slice(1);
+
             return (
                 <NewReportSidebar
-                    type={reportType}
+                    type={typeToReport}
                     onBack={() => navigate(-1)} // back to previous page
                     reportSubmitted={() => {
                         setSidebarView("main");
