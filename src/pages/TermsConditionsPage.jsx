@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AuthCard from "../components/AuthCard";
-import Button from "../components/Button";
+import AuthCard from "../components/Authentication/AuthCard";
+import Button from "../components/Input/Button";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService.js";
 import { useAuth } from "../auth/AuthContext.jsx";

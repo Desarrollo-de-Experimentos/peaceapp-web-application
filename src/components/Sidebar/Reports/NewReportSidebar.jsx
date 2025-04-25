@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar.jsx";
-import TextInput from "../TextInput.jsx";
-import Button from "../Button.jsx";
-import { obtainCurrentLocation } from "../../utils/currentLocation.js";
-import ImageInput from "../ImageInput.jsx";
-import ApiService from "../../services/ApiService.js";
-import Report from "../../models/ReportModel.js";
+import Sidebar from "../Sidebar.jsx";
+import TextInput from "../../Input/TextInput.jsx";
+import Button from "../../Input/Button.jsx";
+import { obtainCurrentLocation } from "../../../utils/currentLocation.js";
+import ImageInput from "../../Input/ImageInput.jsx";
+import ApiService from "../../../services/ApiService.js";
+import Report from "../../../models/ReportModel.js";
 import { HttpStatusCode } from "axios";
-import { useMapLocation } from "../../contexts/MapLocationContext.jsx";
-import theftIcon from "../../assets/icons/map/theft-map.svg";
-import TextArea from "../TextArea.jsx";
+import { useMapLocation } from "../../../contexts/MapLocationContext.jsx";
+import theftIcon from "../../../assets/icons/map/theft-map.svg";
+import TextArea from "../../Input/TextArea.jsx";
 
 const NewReportSidebar = ({ type, onBack, reportSubmitted }) => {
     const [image, setImage] = useState(null);

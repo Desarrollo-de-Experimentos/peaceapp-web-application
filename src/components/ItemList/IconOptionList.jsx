@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import theftIcon from '../assets/icons/theft.svg';
-import carIcon from '../assets/icons/car.svg';
-import lightingIcon from '../assets/icons/lighting.svg';
-import harassmentIcon from '../assets/icons/harassment.svg';
-import otherIcon from '../assets/icons/other.svg';
-import pointsIcon from "../assets/icons/points.svg";
+import theftIcon from '../../assets/icons/theft.svg';
+import carIcon from '../../assets/icons/car.svg';
+import lightingIcon from '../../assets/icons/lighting.svg';
+import harassmentIcon from '../../assets/icons/harassment.svg';
+import otherIcon from '../../assets/icons/other.svg';
+import pointsIcon from "../../assets/icons/points.svg";
 import IconOption from "./IconOption.jsx";
 
 const IconOptionList = () => {

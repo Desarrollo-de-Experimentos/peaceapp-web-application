@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import logoutIcon from "../assets/icons/logout.svg";
-import logoutFilledIcon from "../assets/icons/logout-filled.svg";
+import logoutIcon from "../../assets/icons/logout.svg";
+import logoutFilledIcon from "../../assets/icons/logout-filled.svg";
 import { useNavigate } from "react-router-dom";
 
 const LogOut = () => {

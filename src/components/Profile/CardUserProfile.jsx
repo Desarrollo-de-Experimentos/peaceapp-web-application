@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import mono from "../assets/icons/arigeimpleis.jpg";
+import mono from "../../assets/icons/arigeimpleis.jpg";
 import { useNavigate } from "react-router-dom";
-import User from "../models/UserModel.js";
-import { obtainCurrentLocation } from "../utils/currentLocation.js";
+import User from "../../models/UserModel.js";
+import { obtainCurrentLocation } from "../../utils/currentLocation.js";
 
 const CardUserProfile = ({style}) => {
     const navigate = useNavigate();

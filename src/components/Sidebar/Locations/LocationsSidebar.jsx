@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "./Sidebar.jsx";
+import Sidebar from "../Sidebar.jsx";
 
-const ReportsSidebar = ({ onBack }) => {
+const LocationsSidebar = ({ onBack }) => {
     return (
         <Sidebar>
             <button
@@ -10,10 +10,10 @@ const ReportsSidebar = ({ onBack }) => {
             >
                 ← Back
             </button>
-            <h2 className="text-lg font-bold mb-4">Reports</h2>
-            <p>Content for Reports section...</p>
+            <h2 className="text-lg font-bold mb-4">Locations</h2>
+            <p>Content for Locations section...</p>
         </Sidebar>
     );
 };
 
-export default ReportsSidebar;
+export default LocationsSidebar;

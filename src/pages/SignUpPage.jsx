@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import AuthCard from "../components/AuthCard.jsx";
-import TextInput from "../components/TextInput.jsx";
-import FlagInput from "../components/FlagInput.jsx";
-import PasswordInput from "../components/PasswordInput.jsx";
-import Button from "../components/Button.jsx";
+import AuthCard from "../components/Authentication/AuthCard.jsx";
+import TextInput from "../components/Input/TextInput.jsx";
+import FlagInput from "../components/Input/FlagInput.jsx";
+import PasswordInput from "../components/Authentication/PasswordInput.jsx";
+import Button from "../components/Input/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import User from "../models/UserModel.js";
 

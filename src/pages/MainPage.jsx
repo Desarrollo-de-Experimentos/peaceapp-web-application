@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { replace, useLocation, useNavigate } from "react-router-dom";
 import Map from "../components/Map.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
-import ReportsSidebar from "../components/Sidebar/ReportsSidebar.jsx";
-import AlertsSidebar from "../components/Sidebar/AlertsSidebar.jsx";
-import LocationsSidebar from "../components/Sidebar/LocationsSidebar.jsx";
-import OptionsNewReportSidebar from "../components/Sidebar/OptionsNewReportSidebar.jsx";
-import CardUserProfile from "../components/CardUserProfile.jsx";
-import ItemOption from "../components/ItemOption.jsx";
+import ReportsSidebar from "../components/Sidebar/Reports/ReportsSidebar.jsx";
+import AlertsSidebar from "../components/Sidebar/Alerts/AlertsSidebar.jsx";
+import LocationsSidebar from "../components/Sidebar/Locations/LocationsSidebar.jsx";
+import OptionsNewReportSidebar from "../components/Sidebar/Reports/OptionsNewReportSidebar.jsx";
+import CardUserProfile from "../components/Profile/CardUserProfile.jsx";
+import ItemOption from "../components/ItemList/ItemOption.jsx";
 import mapIcon from "../assets/icons/map.svg";
 import reportIcon from "../assets/icons/report.svg";
 import locationIcon from "../assets/icons/location.svg";
@@ -16,7 +16,7 @@ import mapFilledIcon from "../assets/icons/map-filled.svg";
 import reportFilledIcon from "../assets/icons/report-filled.svg";
 import locationFilledIcon from "../assets/icons/location-filled.svg";
 import alertFilledIcon from "../assets/icons/alert-filled.svg";
-import NewReportSidebar from "../components/Sidebar/NewReportSidebar.jsx";
+import NewReportSidebar from "../components/Sidebar/Reports/NewReportSidebar.jsx";
 import { MapLocationProvider } from "../contexts/MapLocationContext.jsx";
 
 const Main = () => {

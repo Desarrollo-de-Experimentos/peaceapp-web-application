@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "./Sidebar.jsx";
+import Sidebar from "../Sidebar.jsx";
 
 const AlertsSidebar = ({ onBack }) => {
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import LogOut from "../LogOut.jsx";
+import LogOut from "../Authentication/LogOut.jsx";
 
 const Sidebar = ({ children }) => (
     <div className="relative h-full bg-white" style={{ width: "20%", padding: ".8rem" }}>

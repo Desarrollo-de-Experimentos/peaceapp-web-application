@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "./Sidebar.jsx";
-import IconOption from "../IconOption.jsx";
-import theftIcon from "../../assets/icons/theft-new-report.svg";
-import accidentIcon from "../../assets/icons/accident-new-report.svg";
-import lightingIcon from "../../assets/icons/lighting-new-report.svg";
-import harassmentIcon from "../../assets/icons/harassment-new-report.svg";
-import otherIcon from "../../assets/icons/other-new-report.svg";
+import Sidebar from "../Sidebar.jsx";
+import IconOption from "../../ItemList/IconOption.jsx";
+import theftIcon from "../../../assets/icons/theft-new-report.svg";
+import accidentIcon from "../../../assets/icons/accident-new-report.svg";
+import lightingIcon from "../../../assets/icons/lighting-new-report.svg";
+import harassmentIcon from "../../../assets/icons/harassment-new-report.svg";
+import otherIcon from "../../../assets/icons/other-new-report.svg";
 
 const OptionsNewReportSidebar = ({ onBack }) => {
     const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AuthCard from "../components/AuthCard.jsx";
-import TextInput from "../components/TextInput.jsx";
-import PasswordInput from "../components/PasswordInput.jsx";
-import Button from "../components/Button.jsx";
+import AuthCard from "../components/Authentication/AuthCard.jsx";
+import TextInput from "../components/Input/TextInput.jsx";
+import PasswordInput from "../components/Authentication/PasswordInput.jsx";
+import Button from "../components/Input/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService.js";
 import { HttpStatusCode } from "axios";
